@@ -1,5 +1,4 @@
 pipeline {
-
     agent none 
     
     triggers {
@@ -9,7 +8,10 @@ pipeline {
     stages {
         stage('Build') {
             agent {
-                docker { image 'python:3.11-slim' }
+                docker { 
+                    image 'python:3.11-slim' 
+                    args '-u root' 
+                }
             }
             steps {
                 echo 'Simulando build/compilação do código Python...'
@@ -19,7 +21,10 @@ pipeline {
         
         stage('Testes Isolados') {
             agent {
-                docker { image 'python:3.11-slim' }
+                docker { 
+                    image 'python:3.11-slim' 
+                    args '-u root' 
+                }
             }
             steps {
                 echo 'Instalando dependências de teste...'
